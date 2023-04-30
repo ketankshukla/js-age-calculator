@@ -84,3 +84,52 @@ The JavaScript file provides functionality for calculating and displaying the us
 
 By combining the HTML structure, CSS styling, and JavaScript functionality, the Age Calculator web application provides
 a user-friendly and responsive interface for users to calculate and display their age based on their date of birth.
+
+# Update
+
+Here's the `calculateAge` function converted into a concise arrow function:
+
+```javascript
+const calculateAge = () => {
+   resultEl.innerText = "";
+   const birthdayValue = birthdayEl.value;
+
+   if (!birthdayValue) {
+      alert("Please enter your birthday");
+      return;
+   }
+
+   const age = getAge(birthdayValue);
+   resultEl.innerText = age < 0
+           ? "The date cannot be greater than today!"
+           : `You are ${age} ${age > 1 ? "years" : "year"} old`;
+};
+```
+
+In this version, the function has been simplified by:
+
+- Converting it to an arrow function.
+- Using a single `return` statement for the empty input case, removing the need for an `else` block.
+- Combining the age-related conditional statements into a single ternary expression when setting the `innerText`
+  of `resultEl`.
+
+Here's the `getAge` function converted into a concise arrow function:
+
+```javascript
+const getAge = (birthdayValue) => {
+   const currentDate = new Date();
+   const birthDate = new Date(birthdayValue);
+   const age = currentDate.getFullYear() - birthDate.getFullYear();
+   const month = currentDate.getMonth() - birthDate.getMonth();
+
+   return month < 0 || (month === 0 && currentDate.getDate() < birthDate.getDate())
+           ? age - 1
+           : age;
+};
+```
+
+In this version, the function has been simplified by:
+
+- Converting it to an arrow function.
+- Using a ternary expression to return the calculated age directly, eliminating the need for the `if` statement and
+  the `age--` operation.
